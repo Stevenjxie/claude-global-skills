@@ -17,8 +17,9 @@ description: "统一设计 Skill — 设计工作唯一入口/路由枢纽。覆
 | "landing page"、"展示页"、"官网"、"portfolio"、"海报" | 独立创意页 | **→ `taste`**（`~/.claude/skills/taste/`，anti-slop landing/portfolio 专精，Design Read → 三旋钮） |
 | "美化"、"打磨"、"重设计"、"这界面不够好" | 已有界面改进 | **→ `impeccable`**（craft/shape/polish/refine；先按其 SKILL.md 跑 context.mjs setup） |
 | "照着这个截图做"、"参考这个设计" | 提供截图/参考图 | **→ `impeccable` extract** |
-| "审查UI"、"检查设计"、"accessibility" | 审查类动词 | **→ `impeccable` audit** + 对照 Route 1 references |
-| "优化动画"、"动效"、"滚动动画"、"parallax" | 动画需求 | **→ `gsap-*`（全局）** 实现；动效品味 review → `emil-design-eng`；Apple 式手势/spring → `apple-design` |
+| "审查UI"、"检查设计"、"accessibility" | 审查类动词 | **→ `impeccable` audit** + `web-design-guidelines` 合规清单 + 对照 Route 1 references |
+| "优化动画"、"动效"、"滚动动画"、"parallax" | 动画需求 | **→ `gsap-*`（全局）** 实现；动效代码 review → `review-animations`（严格关卡）；品味哲学 → `emil-design-eng`；Apple 式手势/spring → `apple-design` |
+| "RN 卡顿"、"FPS/启动慢"、"bundle 太大"、"内存泄漏" | RN 性能 | **→ `react-native-best-practices`**（Callstack 官方：Hermes/FlashList/re-render/TTI） |
 | "配色建议"、"字体搭配"、"这个品类该长啥样" | 设计灵感/情报 | **→ `ui-ux-pro-max`（全局，只读情报库）** |
 | "做Logo"、"CIP"、"icon"、"banner"、"社媒图"、"pitch deck/演示" | 品牌/营销物料 | **→ `promax-design`**（全内置）；其外部依赖 `brand`/`design-system` 独立可用 |
 | "AI 面板"、"AI 助手/对话界面"、"copilot"、"RAG UI"、"AI 工作台" | AI 产品功能/界面 | **→ `ai-interface-design`**（功能契约→状态机→信任控件→视觉，AIChat/SmartBI 场景专用） |
