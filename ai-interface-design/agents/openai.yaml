@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Interface Design"
+  short_description: "Design AI products, panels, and UX systems"
+  default_prompt: "Use $ai-interface-design to design a complete AI feature and interface for my product."

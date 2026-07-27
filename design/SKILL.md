@@ -21,6 +21,7 @@ description: "统一设计 Skill — 设计工作唯一入口/路由枢纽。覆
 | "优化动画"、"动效"、"滚动动画"、"parallax" | 动画需求 | **→ `gsap-*`（全局）** 实现；动效品味 review → `emil-design-eng`；Apple 式手势/spring → `apple-design` |
 | "配色建议"、"字体搭配"、"这个品类该长啥样" | 设计灵感/情报 | **→ `ui-ux-pro-max`（全局，只读情报库）** |
 | "做Logo"、"CIP"、"icon"、"banner"、"社媒图"、"pitch deck/演示" | 品牌/营销物料 | **→ `promax-design`**（全内置）；其外部依赖 `brand`/`design-system` 独立可用 |
+| "AI 面板"、"AI 助手/对话界面"、"copilot"、"RAG UI"、"AI 工作台" | AI 产品功能/界面 | **→ `ai-interface-design`**（功能契约→状态机→信任控件→视觉，AIChat/SmartBI 场景专用） |
 | "BP"、"商业计划书" | — | **→ `bp-creator`（全局）** |
 | 图表/数据可视化 | — | **→ 内置 `dataviz` skill** |
 | 不确定 | — | 问用户："你要做业务页面还是创意展示页？" |
@@ -35,6 +36,7 @@ description: "统一设计 Skill — 设计工作唯一入口/路由枢纽。覆
 | 动效/细节品味 review | `emil-design-eng`、`apple-design` | 全局。Emil 哲学（Before/After 表输出）；Apple spring/手势/材质 |
 | 设计灵感 / 配色 / 字体 / 品类风格 / UX 指南 | `ui-ux-pro-max` | **全局副本**。只读情报库（84风格/161配色/73字体），只出建议不替代 Route 1 规范 |
 | Logo / CIP / icon / banner / 社媒图 / slides | `promax-design` | 全内置（原 `banner-design`/`slides` 独立 skill 内容与之逐字节相同，已删）。AI 出图脚本需 `GEMINI_API_KEY`，缺则降级为规范/brief 建议 |
+| AI 功能/界面设计（助手/copilot/RAG/数据分析 AI/生成工作台） | `ai-interface-design` | 全局（2026-07-28 自 Codex 侧引入）。先定 AI Product Contract 再谈样式；状态机 idle→streaming→tool-running→…；落地实现仍守 Route 1 三端规范与防呆 |
 | 品牌 voice / 资产规范 / 一致性 | `brand` | promax 的外部依赖，独立可用（inject-brand-context.cjs 等脚本） |
 | Token 架构 / CSS 变量体系 | `design-system` | promax 的外部依赖。仅 greenfield，不改现有三端 token |
 
