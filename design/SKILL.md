@@ -110,6 +110,51 @@ impeccable 的绝对禁令全套、对比度 ≥4.5:1、行长 65–75ch、`pref
 | **中** | AI 面板 / 对话界面（流式态、工具运行态可做真交互假动作）；web-admin 业务页；小程序页 | **评「该怎么排」有效，评「长什么样」会失真** |
 | **不适用** | RN 屏幕（浏览器跑不了 Paper / 手势 / 键盘行为）；要真实数据/权限/RLS 才能判断的页面 | 走 Route 0 / Route 1 |
 
+### 一轮出 N 版时：槽位化写法（必须）
+
+**Route A 最重要的一条。** 一轮出 N 版，看完最常见的结论不是"选第 2 版"，而是**"第 2 版的配色好，第 3 版的排布好"**。
+
+要能接着做出「V2 的色 + V3 的排」，前提是**这些部分在代码里物理分开**。混着写，重组只能靠重新生成——上一轮等于白做，会陷进"每轮都从零摇 N 版"的循环。
+
+五个槽位：`color` / `type` / `layout` / `motion` / `copy`，用注释标出边界：
+
+```html
+<style>
+/* ==== SLOT:color ==== */
+:root { --bg:…; --surface:…; --ink:…; --brand:…; --accent:… }
+@media (prefers-color-scheme: dark) { :root { … } }
+/* ==== /SLOT:color ==== */
+
+/* ==== SLOT:type ==== */
+:root { --font-display:…; --font-body:…; --scale-h1:…; --scale-body:… }
+/* ==== /SLOT:type ==== */
+
+/* ==== SLOT:motion ==== */
+@keyframes …
+@media (prefers-reduced-motion: reduce) { … }
+/* ==== /SLOT:motion ==== */
+</style>
+
+<!-- ==== SLOT:layout ==== -->
+<main>…</main>
+<!-- ==== /SLOT:layout ==== -->
+```
+
+**硬约束**：`layout` 块里**不许出现字面色值与字号**，只能引用 `color`/`type` 声明的变量。写死一个 `#1a1a1a` 在 layout 里，这一版的色就再也拆不出来了。
+
+`copy` 要能单独换就把可见文案抽成一个 JS 常量对象独立成块；不重要就并进 layout。
+
+**每版带一张变体卡**（artifact 底部 + 回复里各一份）：
+
+```
+V2 · color: 深墨绿 + 黄铜 · type: 衬线标题 / 无衬线正文 · layout: 左图右文交错
+   · motion: 分段淡入 · copy: 功能向、短句
+```
+
+**重组语法**：说 `V2.color + V3.layout`，直接取那两个块拼，不重新生成。没点名的槽位默认跟 `layout` 那版走。
+
+**一轮之内槽位定义不能变**：V1 把配色写进 layout 块、V2 分开了，两者就换不了。动手前先声明这一轮用哪几个槽位，每版照办。
+
 ---
 
 ## Route 1: 业务页面开发
