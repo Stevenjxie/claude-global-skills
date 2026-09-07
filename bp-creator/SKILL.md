@@ -1,6 +1,6 @@
 ---
 name: bp-creator
-description: "商业计划书 (BP) 全流程制作。编排 NotebookLM 资料查询 + Deep Research 行业研究 + Business Document 正式文档 + PPT Creator 演示文稿，一站式输出投资人级别 BP。使用 /bp-creator 触发。"
+description: "撰写商业计划书、融资材料或 pitch deck；按用户所需格式组织研究、正文和导出。用于 BP 制作，不用于一般行业问答。"
 ---
 
 # BP Creator - 商业计划书全流程制作
@@ -17,6 +17,10 @@ description: "商业计划书 (BP) 全流程制作。编排 NotebookLM 资料查
 ## Quick Start
 
 用户只需说 `/bp-creator` 或 "帮我做BP"，Skill 自动引导完成全流程。
+
+### 宿主能力与交付范围
+
+先按当前能力目录解析下面的 skill、插件和脚本路径；历史 Claude 命令仅用于已核验存在的 Claude 安装，不在 Codex 中照抄。`pdf-creator`、`ppt-creator`、`business-document-generator` 不存在时，使用当前宿主提供的文档/演示工具或本地导出库；Codex 可先查询 workspace dependencies。不要为套用旧流程虚构工具或自动安装插件。只生成用户要求的交付物；若必要的导出能力仍缺失，完成可做的正文并说明缺少的格式。
 
 ---
 
@@ -74,7 +78,7 @@ python ~/.claude/skills/notebooklm/scripts/run.py ask_question.py \
 
 ### 1b. Deep Research 行业分析 (可选)
 
-对于需要补充行业数据的场景，使用 `deep-research` skill:
+需要补充行业数据时使用当前研究工具；只有用户明确要求 Deep Research 且当前技能触发条件允许时才调用 `deep-research`。以下为满足条件后的示例：
 
 ```
 /deep-research <行业名称>市场分析：市场规模、增长趋势、竞争格局、政策环境
@@ -296,7 +300,7 @@ Phase 4: 自查 + 交付
 
 ## Resources
 
-### 依赖的 Skills (已安装)
+### 可选能力映射（使用前核验，不代表当前已安装）
 
 | Skill | 路径 | 用途 |
 |-------|------|------|

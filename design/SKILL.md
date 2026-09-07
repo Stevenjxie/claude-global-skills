@@ -1,11 +1,17 @@
 ---
 name: design
-description: "统一设计 Skill — 设计工作唯一入口/路由枢纽。覆盖: (0) 交互体验/流程/空态/UX文案 (→ ux-flow 门 + impeccable shape/critique/onboard/clarify), (A) Artifact 原型评估 (单文件/断外链, 栈规范与项目端不同), (1) 业务页面开发 (Vue/RN/小程序三端规范, 本 skill 权威), (2) 创意展示页 (landing page/showcase/海报 → taste/impeccable), (3) 截图提取设计系统 (→ impeccable extract), (4) UI 审查 (→ impeccable audit), (5) 品牌物料 (logo/CIP/banner/社媒图/slides → promax-design), (6) 动效 (→ gsap-*/emil-design-eng/apple-design)。当用户说\"做页面\"、\"设计UI\"、\"照着截图做\"、\"审查UI\"、\"美化\"、\"landing page\"、\"加动画\"、\"这个流程怎么走\"、\"交互体验\"、\"用户会不会卡\"、\"空态\"、\"错误提示怎么写\"、\"出几版看看\"、\"做个原型\"时触发。"
+description: "设计工作路由：业务页面、交互流程、原型、创意页、UI 审查、品牌与动效。用户要求设计或改进界面时使用；优先遵循项目专用设计体系。"
 ---
 
 # 统一设计 Skill (路由枢纽 v2)
 
 自动识别设计意图，路由到正确的工作流。
+
+## 适用范围与能力解析
+
+- 项目自己的 AGENTS.md / CLAUDE.md 与专用设计技能决定项目栈和门禁；下文 Route 1 的 Vue/RN/小程序规范仅适用于对应项目，不套用到其他框架。
+- 跨技能引用从当前宿主的能力目录解析：Claude Code 使用其已加载路径，Codex 使用其已加载路径；不要在 Codex 中执行下面的 Claude 路径示例。`taste` 的调用名是 `design-taste-frontend`。
+- 路由目标不存在时，使用已提供的相应能力继续；只有必要输入或工具确实缺失才说明阻塞。不要把此文件中的工具举例当成安装或可用证明。
 
 **v2.1 (2026-07-29) 变更**: 补 **Route 0 交互体验/流程**（原路由表全是产物导向，行为/流程问题无入口，`ux-flow` 只能靠 CLAUDE.md 硬门触发，走 design 永远碰不到）+ **Route A Artifact 原型**（taste §3.A 的 React/Tailwind/next-font 栈在 Artifact 里全部跑不了，此前无人标注）+ 边界铁律 5/6。
 
@@ -28,14 +34,14 @@ description: "统一设计 Skill — 设计工作唯一入口/路由枢纽。覆
 | "做Logo"、"CIP"、"icon"、"banner"、"社媒图"、"pitch deck/演示" | 品牌/营销物料 | **→ `promax-design`**（全内置）；其外部依赖 `brand`/`design-system` 独立可用 |
 | "AI 面板"、"AI 助手/对话界面"、"copilot"、"RAG UI"、"AI 工作台" | AI 产品功能/界面 | **→ `ai-interface-design`**（功能契约→状态机→信任控件→视觉，AIChat/SmartBI 场景专用） |
 | "BP"、"商业计划书" | — | **→ `bp-creator`（全局）** |
-| 图表/数据可视化 | — | **→ 内置 `dataviz` skill** |
-| 不确定 | — | 问用户："你要做业务页面还是创意展示页？" |
+| 图表/数据可视化 | — | 当前目录提供 `dataviz` 时使用；否则按任务使用现有图表库、绘图工具或内联可视化 |
+| 不确定 | — | 先根据项目和交付目标选择；只有不同理解会实质改变结果时才提问 |
 
 ## 外部 skill 委派地图 (v2)
 
 | 需求 | 委派给 | 说明 |
 |------|--------|------|
-| 低技术素养用户流程（operator/仓管/质检） | `ux-flow`（项目内） | **强制门**，见 CLAUDE.md UX Flow Gate。brainstorming 的 propose approaches 之前必跑；Phase 1 的「UX Flow Analysis」是 spec 强制组成 |
+| 低技术素养用户流程（operator/仓管/质检） | `ux-flow`（项目内） | 项目声明 UX Flow Gate 时按其要求执行；在方案选型之前分析操作流程，不把项目门禁推广到所有仓库 |
 | 交互体验 / 流程 / 空态 / UX 文案 | `impeccable` 的 `shape`/`critique`/`onboard`/`clarify` + `reference/interaction-design.md` | 见 Route 0 分诊表。这些是**行为**问题，别当成"做页面"路由到 Route 1 |
 | 创意 landing / portfolio / 官网 / 重设计 | `taste`（frontmatter 名 `design-taste-frontend`） | 全局。真设计系统选型（Fluent/Material/Carbon/GOV.UK…）+ 反 AI 默认审美。**不接 dashboard/数据表/多步产品 UI** |
 | 产品 UI 打磨 / 审查 / 截图提取 / 大胆视觉 | `impeccable` | 全局。子命令 craft/shape/audit/polish/extract/animate…；**必须先跑其 context.mjs setup 步骤** |
@@ -52,7 +58,7 @@ description: "统一设计 Skill — 设计工作唯一入口/路由枢纽。覆
 1. **Route 1 三端业务页 (Vue Element Plus / RN Paper / 小程序 WXSS) 永远走本 skill 的 references**，绝不采纳 taste/impeccable/ui-ux-pro-max 的通用栈建议（shadcn/Tailwind/绿地配色）——会违反「不发明新样式」原则 + `fool-proof-design.md` 防呆规范。
 2. taste/impeccable 只接**独立创意页**（landing/showcase/官网/海报/Artifacts）与 UI 打磨审查；业务页面落地实现回 Route 1 平台规范。
 3. 防呆 (`fool-proof-design.md`) + `ux-flow` 门是 Route 1 的强制前置，外部 skill 不覆盖它们。
-4. shadcn/ui + Tailwind 栈（原 `ui-styling` skill）已移除——三端都装不了；真有 React 绿地需求再从 claudekit 重装。
+4. Route 1 的既有 Vue/RN/小程序项目不改用 shadcn/ui + Tailwind；独立 React/Web 项目按项目规则与当前已提供的技能选择，不要求重新安装已有能力。
 5. **交互体验问题不要路由到产物 skill**。"这一步用户会不会点错"、"空态显示什么"、"这句错误提示怎么写"是**行为**问题，答案在 Route 0 那批；路由到 taste/impeccable 的视觉工作流会答非所问。
 6. **Artifact 原型 ≠ 交付物**。Route A 产物是评估用近似（装不了 Element Plus / Paper / WXSS 组件），选中后必须按 Route 1 平台规范重写，不得直接搬进业务代码。
 
@@ -64,8 +70,8 @@ description: "统一设计 Skill — 设计工作唯一入口/路由枢纽。覆
 
 | 问题形态 | 去哪 |
 |---|---|
-| RN 低技术素养屏幕（operator/仓管/质检；报工/入库/出库/盘点/扫码收货） | **`ux-flow` 强制门** — CLAUDE.md UX Flow Gate 管辖，brainstorming 的 propose approaches 之前必跑 |
-| 需求还没定、要做的是新功能 | `superpowers:brainstorming` 先行，再回本表 |
+| RN 低技术素养屏幕（operator/仓管/质检；报工/入库/出库/盘点/扫码收货） | 项目声明 `ux-flow` 强制门时，在方案选型之前执行 |
+| 需求还没定、要做的是新功能 | Codex 直接梳理目标、约束和可验收结果，再回本表；Claude Code 若其规则允许，可先用 `superpowers:brainstorming`。Codex 不走该路由 |
 | 写码前规划一个功能的 UX/UI | `impeccable shape` |
 | 已有界面的 UX 评审打分 | `impeccable critique`（快照存 `critique-storage.mjs`，`polish` 会当 backlog 读） |
 | 首次运行 / 空态 / 激活流程 | `impeccable onboard` |
@@ -80,7 +86,7 @@ description: "统一设计 Skill — 设计工作唯一入口/路由枢纽。覆
 
 ## Route A: Artifact 原型（评估用）
 
-**硬约束**：Artifact 是单文件、无构建、CSP 断一切外部 host（CDN / 外链字体 / 远程图片 / fetch 全断）、没有 package.json。
+**适用条件**：下述降级方案适用于已确认的单文件、无构建、CSP 禁止外链的 Artifact 宿主。先核验实际交付环境；本地网页、带构建工程或允许联网的预览按其真实能力实现，不因“原型”一词假定这些限制。
 
 ### ⛔ taste §3.A 栈规范在此全部不适用
 
@@ -96,7 +102,7 @@ React / Next RSC、Tailwind v4 + `@tailwindcss/postcss`、`motion/react`、`next
 
 ### 图片资产
 
-taste §4.8 的优先级链在此**失效**：本环境无 image-gen 工具，`picsum.photos` 被 CSP 断。可选项只有 ① data: URI 内嵌，② 纯 CSS/SVG 构图，③ 留标注占位（`<!-- TODO: hero 图 1600x1200 -->`）并在回复里告诉用户缺哪几张。**不要因为引不到图就退回手绘 SVG 插画**——impeccable 的禁令在这条上仍然生效。
+图片生成能力与预览宿主的外链限制分别核验。存在图片生成工具时按其规则使用，再采用宿主支持的资产引用方式；禁止外链的宿主可用 data: URI 内嵌。确实无法取得资产时使用符合设计要求的构图或明确标注缺图，不声称当前环境没有 image-gen，也不把随机占位图当成完成资产。
 
 ### 仍然生效的
 
