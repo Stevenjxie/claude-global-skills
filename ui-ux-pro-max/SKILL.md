@@ -194,7 +194,7 @@ python .claude/skills/ui-ux-pro-max/scripts/search.py "internal analytics dashbo
 
 ### Step 3: Supplement with Detailed Searches (as needed)
 
-After getting the design system, use domain searches to get additional details:
+Use domain searches directly for scoped tasks, or to supplement a design system when one was requested:
 
 ```bash
 python .claude/skills/ui-ux-pro-max/scripts/search.py "<keyword>" --domain <domain> [-n <max_results>]
