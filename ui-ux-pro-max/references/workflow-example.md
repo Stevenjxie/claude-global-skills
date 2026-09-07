@@ -35,4 +35,3 @@ python .claude/skills/ui-ux-pro-max/scripts/search.py "list performance navigati
 **Then:** Synthesize design system + detailed searches and implement the design.
 
 ---
-

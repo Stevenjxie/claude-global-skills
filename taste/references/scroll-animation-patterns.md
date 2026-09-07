@@ -151,4 +151,3 @@ Use this for: feature lists, testimonial grids, logo walls, anything that just n
 * **Staggered Orchestration:** Use `staggerChildren` (Motion) or CSS cascade (`animation-delay: calc(var(--index) * 100ms)`) for reveal moments where sequence matters. For `staggerChildren`, parent (`variants`) and children MUST share the same Client Component tree.
 
 ---
-

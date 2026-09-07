@@ -75,4 +75,3 @@ This is a vocabulary, not a library. The agent should KNOW these pattern names t
 * **NEVER mix GSAP / Three.js with Motion in the same component tree.** They fight over the same frames.
 
 ---
-
